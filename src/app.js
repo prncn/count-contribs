@@ -2,6 +2,16 @@ const clientId = "b3476355e8434cdea6c69faf524c8db3"
 const clientSecret = "e349effa6ee3489ba63c56ab59cae285"
 const playlist = "2b7qybyNGcVXVb5kVsEfBX"
 
+const names_dict = {
+  "foxtrap98": "Benni",
+  "dinexx": "Dennis",
+  "1195540442": "Nils",
+  "mike4634": "Mike",
+  "1123702652": "Thommy",
+  "t3n1420lze0mhesq78k34di2g": "Amine",
+  "sinkosh": "Princen"
+}
+
 async function get_token() {
   const result = await fetch("https://accounts.spotify.com/api/token", {
     method: 'POST',
@@ -30,6 +40,7 @@ async function get_items(offset) {
 
 async function solve_contributors() {
   let contribs = []
+  let genres = []
   let dataset = {}
   
   for(let i=0; i<5; i++) {
@@ -42,10 +53,10 @@ async function solve_contributors() {
   console.log(contribs);
 
   for(contrib of contribs) {
-    if(await contrib in dataset) {
-      dataset[contrib]++;
+    if(await names_dict[contrib] in dataset) {
+      dataset[names_dict[contrib]]++;
     } else {
-      dataset[contrib] = 0;
+      dataset[names_dict[contrib]] = 0;
     }
   }
 
